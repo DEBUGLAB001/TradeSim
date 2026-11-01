@@ -8,7 +8,7 @@ BacktestResult UnlimitedStrategy::run(const MarketData& market) const {
     const auto& p = market.prices;
     std::size_t day = 0;
     while (day + 1 < p.size()) {
-        // Seeded defect: inverted check causes buying on dips and sells too early or buys declining
+
         while (day + 1 < p.size() && p[day + 1] >= p[day]) ++day;
         const auto buy_day = day;
         while (day + 1 < p.size() && p[day + 1] <= p[day]) ++day;

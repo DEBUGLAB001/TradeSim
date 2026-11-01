@@ -3,71 +3,96 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0b1118">
-  <title>TradeSim — Strategy Backtesting</title>
+  <meta name="theme-color" content="#f3f6fa">
+  <meta name="description" content="TradeSim strategy backtesting and execution intelligence dashboard.">
+  <title>TradeSim — Market overview</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
   <div class="app-frame">
-    <aside class="sidebar">
-      <a class="brand" href="#top"><span class="brand-mark">T<span>·</span></span><span>TradeSim<small>EXECUTION ENGINE</small></span></a>
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="TradeSim home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M6 8h20M16 8v16M10 14h12M11 24h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="22" r="2" fill="currentColor"/></svg></span>
+        <span class="brand-copy">TradeSim<small>MARKET INTELLIGENCE</small></span>
+      </a>
+
       <div class="nav-caption">WORKSPACE</div>
-      <a class="nav-link selected" href="#dashboard"><span class="nav-glyph">▦</span> Strategy dashboard</a>
-      <a class="nav-link" href="#comparison"><span class="nav-glyph">⇄</span> Policy comparison</a>
-      <a class="nav-link" href="#transactions"><span class="nav-glyph">≡</span> Execution log</a>
+      <nav class="primary-nav">
+        <a class="nav-link selected" href="index.html" aria-current="page"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="2.5" width="6" height="6" rx="1"/><rect x="11.5" y="2.5" width="6" height="6" rx="1"/><rect x="2.5" y="11.5" width="6" height="6" rx="1"/><rect x="11.5" y="11.5" width="6" height="6" rx="1"/></svg>Overview</a>
+        <a class="nav-link" href="comparison.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h11M12 2l3 3-3 3M16 15H5m3-3-3 3 3 3"/></svg>Strategy comparison</a>
+        <a class="nav-link" href="execution.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4.5h12M4 9.5h12M4 14.5h8"/><circle cx="2.5" cy="4.5" r=".5"/><circle cx="2.5" cy="9.5" r=".5"/><circle cx="2.5" cy="14.5" r=".5"/></svg>Execution log</a>
+      </nav>
+
       <div class="sidebar-bottom">
-        <div class="connection"><i></i><span>ENGINE CONNECTED<small id="engine-status">Loading market feed…</small></span></div>
-        <div class="sidebar-foot">C++17 <span>·</span> LOCAL PREVIEW</div>
+        <div class="connection">
+          <span class="connection-dot" aria-hidden="true"></span>
+          <div><span class="connection-label">ENGINE STATUS</span><small id="engine-status">Connecting to market feed…</small></div>
+        </div>
+        <div class="sidebar-foot"><span class="version-mark">TS</span><span>C++17 ENGINE</span><span class="foot-separator">·</span><span>LOCAL</span></div>
       </div>
     </aside>
 
     <main id="top" class="main-area">
       <header class="topbar">
-        <div class="crumb">TRADESIM <span>/</span> BACKTESTING</div>
-        <div class="top-right"><span class="market-clock"><i></i> MARKET FEED ONLINE</span><span class="user-badge">RE</span></div>
+        <div class="crumb"><span>WORKSPACE</span><span class="crumb-separator">/</span><strong>STRATEGY LAB</strong></div>
+        <div class="top-right"><span class="market-clock"><i aria-hidden="true"></i><span>MARKET FEED ONLINE</span></span><span class="avatar" aria-label="TradeSim user">TS</span></div>
       </header>
 
-      <section id="dashboard" class="page-heading">
-        <div><div class="eyebrow">EXECUTION INTELLIGENCE <b>•</b> POLICY LAB</div><h1>Strategy Backtesting</h1><p>Compare execution policies against deterministic market histories and investigate anomalies in the trading ledger.</p></div>
-        <button id="reset-button" class="reset-button"><span>↺</span> Reset scenario</button>
-      </section>
+      <div class="content-wrap">
+        <section id="dashboard" class="page-heading">
+          <div>
+          <div class="eyebrow"><span class="eyebrow-line"></span>TRADESIM WORKSPACE <span class="eyebrow-dot">/</span> OVERVIEW</div>
+            <h1>Market overview</h1>
+            <p>Evaluate trading policies, review portfolio risk, and inspect every execution.</p>
+          </div>
+          <button id="reset-button" class="reset-button" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16.5 8a6.5 6.5 0 1 0 .1 4M16.5 4v4h-4"/></svg>Reset scenario</button>
+        </section>
 
-      <section class="control-bar" aria-label="Backtest configuration">
-        <label><span>MARKET</span><select id="ticker-select" aria-label="Market ticker"></select></label>
-        <span class="control-divider"></span>
-        <label class="strategy-select"><span>POLICY</span><select id="strategy-select" aria-label="Trading strategy"></select></label>
-        <div class="control-spacer"></div>
-        <div class="period-chip"><span>▤</span><span id="session-count">— sessions</span></div>
-        <button id="run-button" class="run-button"><span>▶</span> Run backtest</button>
-      </section>
+        <section class="control-bar" aria-label="Backtest configuration">
+          <label class="control-field"><span class="control-label">MARKET</span><select id="ticker-select" aria-label="Market ticker"></select></label>
+          <span class="control-divider" aria-hidden="true"></span>
+          <label class="control-field strategy-select"><span class="control-label">STRATEGY</span><select id="strategy-select" aria-label="Trading strategy"></select></label>
+          <div class="control-spacer"></div>
+          <div class="period-chip"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="12" rx="2"/><path d="M6.5 2.5v4M13.5 2.5v4M3 8.5h14"/></svg><span id="session-count">— sessions</span></div>
+          <button id="run-button" class="run-button" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4.5 8 5.5-8 5.5z" fill="currentColor" stroke="none"/></svg>Run backtest</button>
+        </section>
 
-      <div id="notice" class="notice hidden" role="status"></div>
+        <div id="notice" class="notice hidden" role="status" aria-live="polite"></div>
 
-      <section class="metric-grid" aria-label="Backtest summary">
-        <article class="metric-card"><div class="metric-label">TOP REPORTED RETURN <span class="metric-icon mint">↗</span></div><div id="metric-profit" class="metric-value">—</div><div id="metric-profit-note" class="metric-note">Run a backtest to populate</div></article>
-        <article class="metric-card"><div class="metric-label">COMPLETED CYCLES <span class="metric-icon blue">⟳</span></div><div id="metric-trades" class="metric-value">—</div><div id="metric-trades-note" class="metric-note">Across selected policies</div></article>
-        <article class="metric-card"><div class="metric-label">PEAK-TO-TROUGH <span class="metric-icon amber">⌁</span></div><div id="metric-drawdown" class="metric-value">—</div><div id="metric-drawdown-note" class="metric-note">Market drawdown</div></article>
-        <article class="metric-card status-metric"><div class="metric-label">POLICY HEALTH <span class="metric-icon rose">⌖</span></div><div id="metric-health" class="metric-value health-value">—</div><div id="metric-health-note" class="metric-note">Awaiting execution</div></article>
-      </section>
+        <section class="metric-grid" aria-label="Backtest summary">
+          <article class="metric-card metric-return">
+            <div class="metric-top"><div class="metric-label">TOP REPORTED RETURN</div><span class="metric-icon mint" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M4 14 8 10l3 2 5-6M11.5 6H16v4.5"/></svg></span></div>
+            <div id="metric-profit" class="metric-value">—</div><div id="metric-profit-note" class="metric-note">Run a backtest to populate</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><div class="metric-label">COMPLETED CYCLES</div><span class="metric-icon blue" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M16 8a6 6 0 0 0-10.6-2L4 7.5M4 4v3.5h3.5M4 12a6 6 0 0 0 10.6 2L16 12.5M16 16v-3.5h-3.5"/></svg></span></div>
+            <div id="metric-trades" class="metric-value">—</div><div id="metric-trades-note" class="metric-note">Across selected policies</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><div class="metric-label">PEAK-TO-TROUGH</div><span class="metric-icon amber" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M3 5h14M3 10h14M3 15h14M6 3v4m8 1v4m-5 1v4"/></svg></span></div>
+            <div id="metric-drawdown" class="metric-value">—</div><div id="metric-drawdown-note" class="metric-note">Market drawdown</div>
+          </article>
+          <article class="metric-card status-metric">
+            <div class="metric-top"><div class="metric-label">POLICY HEALTH</div><span class="metric-icon rose" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2.5 16 5v4.3c0 3.6-2.4 6.2-6 8.2-3.6-2-6-4.6-6-8.2V5z"/><path d="m7.5 10 1.7 1.7 3.4-3.4"/></svg></span></div>
+            <div id="metric-health" class="metric-value health-value">—</div><div id="metric-health-note" class="metric-note">Awaiting execution</div>
+          </article>
+        </section>
 
-      <section class="panel chart-panel">
-        <div class="panel-heading"><div><div class="panel-kicker">MARKET CONTEXT <span>01</span></div><h2 id="chart-title">Price history</h2></div><div class="chart-legend"><i></i> DAILY CLOSE <span class="chart-period">10 SESSIONS</span></div></div>
-        <div class="chart-container"><div id="chart-ylabels" class="chart-ylabels"></div><svg id="price-chart" viewBox="0 0 960 225" preserveAspectRatio="none" role="img" aria-label="Daily closing prices"></svg></div>
-        <div id="chart-xlabels" class="chart-xlabels"></div>
-      </section>
+        <section class="panel chart-panel" aria-labelledby="chart-title">
+          <div class="panel-heading">
+            <div><div class="panel-kicker"><span class="section-index">01</span> MARKET CONTEXT</div><h2 id="chart-title">Price history</h2></div>
+            <div class="chart-meta">
+              <div class="quote-block"><span class="quote-label">LATEST CLOSE</span><strong id="market-last">—</strong><span id="market-change" class="quote-change">—</span></div>
+              <span class="chart-legend"><i aria-hidden="true"></i>DAILY CLOSE</span><span class="chart-period">10 SESSIONS</span>
+            </div>
+          </div>
+          <div class="chart-container"><div id="chart-ylabels" class="chart-ylabels"></div><svg id="price-chart" viewBox="0 0 960 225" preserveAspectRatio="none" role="img" aria-label="Daily closing prices"></svg></div>
+          <div id="chart-xlabels" class="chart-xlabels"></div>
+        </section>
 
-      <section id="comparison" class="panel table-panel">
-        <div class="panel-heading"><div><div class="panel-kicker">POLICY MONITOR <span>02</span></div><h2>Strategy comparison</h2></div><div class="live-tag"><i></i> LIVE BACKTEST DATA</div></div>
-        <div class="table-scroll"><table><thead><tr><th>STRATEGY</th><th>TOTAL PROFIT</th><th>TRADES</th><th>MAX DRAWDOWN</th><th>STATUS</th></tr></thead><tbody id="strategy-rows"><tr><td colspan="5" class="empty-cell">Run a backtest to compare policies.</td></tr></tbody></table></div>
-      </section>
-
-      <section id="transactions" class="panel transaction-panel">
-        <div class="panel-heading"><div><div class="panel-kicker">EXECUTION TRACE <span>03</span></div><h2>Transaction log</h2></div><span id="transaction-count" class="subtle-count">0 EVENTS</span></div>
-        <div class="table-scroll"><table><thead><tr><th>STRATEGY</th><th>ACTION</th><th>SESSION</th><th>PRICE</th><th>REALIZED PROFIT</th></tr></thead><tbody id="transaction-rows"><tr><td colspan="5" class="empty-cell">Trade events will appear here.</td></tr></tbody></table></div>
-      </section>
-
-      <footer><span>TRADESIM EXECUTION ENGINE <b>·</b> DETERMINISTIC MARKET DATA</span><span>BACKTEST RUNNER <i></i> READY</span></footer>
+        <footer><span>TRADESIM <b>·</b> DETERMINISTIC MARKET DATA</span><span>BACKTEST ENGINE <i aria-hidden="true"></i> READY</span></footer>
+      </div>
     </main>
   </div>
 </body>

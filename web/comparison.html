@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f3f6fa">
+  <meta name="description" content="Compare TradeSim backtesting strategies and risk metrics.">
+  <title>TradeSim — Strategy comparison</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-frame">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="TradeSim home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M6 8h20M16 8v16M10 14h12M11 24h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="22" r="2" fill="currentColor"/></svg></span>
+        <span class="brand-copy">TradeSim<small>MARKET INTELLIGENCE</small></span>
+      </a>
+      <div class="nav-caption">WORKSPACE</div>
+      <nav class="primary-nav">
+        <a class="nav-link" href="index.html"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="2.5" width="6" height="6" rx="1"/><rect x="11.5" y="2.5" width="6" height="6" rx="1"/><rect x="2.5" y="11.5" width="6" height="6" rx="1"/><rect x="11.5" y="11.5" width="6" height="6" rx="1"/></svg>Overview</a>
+        <a class="nav-link selected" href="comparison.html" aria-current="page"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5h11M12 2l3 3-3 3M16 15H5m3-3-3 3 3 3"/></svg>Strategy comparison</a>
+        <a class="nav-link" href="execution.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4.5h12M4 9.5h12M4 14.5h8"/><circle cx="2.5" cy="4.5" r=".5"/><circle cx="2.5" cy="9.5" r=".5"/><circle cx="2.5" cy="14.5" r=".5"/></svg>Execution log</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="connection"><span class="connection-dot" aria-hidden="true"></span><div><span class="connection-label">ENGINE STATUS</span><small id="engine-status">Connecting to market feed…</small></div></div>
+        <div class="sidebar-foot"><span class="version-mark">TS</span><span>C++17 ENGINE</span><span class="foot-separator">·</span><span>LOCAL</span></div>
+      </div>
+    </aside>
+    <main id="top" class="main-area">
+      <header class="topbar"><div class="crumb"><span>WORKSPACE</span><span class="crumb-separator">/</span><strong>STRATEGY COMPARISON</strong></div><div class="top-right"><span class="market-clock"><i aria-hidden="true"></i><span>MARKET FEED ONLINE</span></span><span class="avatar" aria-label="TradeSim user">TS</span></div></header>
+      <div class="content-wrap">
+        <section class="page-heading">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span>POLICY MONITOR <span class="eyebrow-dot">/</span> PERFORMANCE</div><h1>Strategy comparison</h1><p>Review returns, trade counts, drawdown, and policy validation side by side.</p></div>
+          <button id="reset-button" class="reset-button" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16.5 8a6.5 6.5 0 1 0 .1 4M16.5 4v4h-4"/></svg>Reset scenario</button>
+        </section>
+        <section class="control-bar" aria-label="Backtest configuration">
+          <label class="control-field"><span class="control-label">MARKET</span><select id="ticker-select" aria-label="Market ticker"></select></label><span class="control-divider" aria-hidden="true"></span>
+          <label class="control-field strategy-select"><span class="control-label">POLICY SCOPE</span><select id="strategy-select" aria-label="Trading strategy"></select></label><div class="control-spacer"></div>
+          <div class="period-chip"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="12" rx="2"/><path d="M6.5 2.5v4M13.5 2.5v4M3 8.5h14"/></svg><span id="session-count">— sessions</span></div>
+          <button id="run-button" class="run-button" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4.5 8 5.5-8 5.5z" fill="currentColor" stroke="none"/></svg>Run comparison</button>
+        </section>
+        <div id="notice" class="notice hidden" role="status" aria-live="polite"></div>
+        <section class="panel table-panel" aria-labelledby="comparison-title">
+          <div class="panel-heading"><div><div class="panel-kicker"><span class="section-index">01</span> RESULTS</div><h2 id="comparison-title">Policy performance</h2><p class="panel-description">Compare the selected strategies using a consistent market history.</p></div><div class="live-tag"><i aria-hidden="true"></i>BACKTEST RESULTS</div></div>
+          <div class="table-scroll"><table><thead><tr><th scope="col">STRATEGY</th><th scope="col">TOTAL PROFIT</th><th scope="col">CYCLES</th><th scope="col">MAX DRAWDOWN</th><th scope="col">STATUS</th></tr></thead><tbody id="strategy-rows"><tr><td colspan="5" class="empty-cell">Run a comparison to view strategy results.</td></tr></tbody></table></div>
+        </section>
+        <footer><span>TRADESIM <b>·</b> STRATEGY PERFORMANCE</span><span>BACKTEST ENGINE <i aria-hidden="true"></i> READY</span></footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -14,11 +14,11 @@ BacktestResult FeeStrategy::run(const MarketData& market) const {
         const bool should_sell = buy_day >= 0 && (day + 1 == static_cast<int>(prices.size()) || prices[day] > prices[day + 1]);
         if (buy_day < 0 && should_buy) {
             buy_day = day;
-            buy_cost = prices[day] + fee;  // Seeded defect 1: charges the settlement fee when opening.
+            buy_cost = prices[day] + fee;
             trades.push_back({"BUY", day, prices[day], 0.0});
         } else if (should_sell) {
             const double gross = prices[day] - prices[buy_day];
-            const double net = prices[day] - buy_cost - 2.0 * fee;  // Seeded defect 2: charges twice again at settlement.
+            const double net = prices[day] - buy_cost - 2.0 * fee;
             trades.push_back({"SELL", day, prices[day], net});
             expected_net_profit += gross - fee;
             buy_day = -1;

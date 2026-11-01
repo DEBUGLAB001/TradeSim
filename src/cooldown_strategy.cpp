@@ -10,12 +10,12 @@ BacktestResult CooldownStrategy::run(const MarketData& market) const {
     int buy_day = -1;
     int cooldown_until_day = -1;
     for (int day = 0; day < static_cast<int>(prices.size()); ++day) {
-        if (buy_day < 0 && day >= cooldown_until_day && day + 1 < static_cast<int>(prices.size()) && prices[day] <= prices[day + 1]) {  // Seeded defect 4: final restricted session is treated as eligible.
+        if (buy_day < 0 && day >= cooldown_until_day && day + 1 < static_cast<int>(prices.size()) && prices[day] <= prices[day + 1]) {
             buy_day = day;
             trades.push_back({"BUY", day, prices[day], 0.0});
         } else if (buy_day >= 0 && (day + 1 == static_cast<int>(prices.size()) || prices[day] > prices[day + 1])) {
             trades.push_back({"SELL", day, prices[day], prices[day] - prices[buy_day]});
-            cooldown_until_day = day + cooldown_days - 1;  // Seeded defect 3: last restricted day is one day too early.
+            cooldown_until_day = day + cooldown_days - 1;
             buy_day = -1;
         }
     }
