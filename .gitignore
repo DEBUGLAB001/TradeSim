@@ -6,3 +6,5 @@ bin/
 *.so
 *.exe
 assets/
+assets/**
+*.png
